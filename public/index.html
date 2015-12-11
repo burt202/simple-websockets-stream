@@ -1,17 +1,9 @@
 <html>
-
-<body>
-  <div class="output"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.js"></script>
-  <script>
-
-    var socket = io.connect("http://localhost:8080");
-    socket.on("news", function (data) {
-      var p = document.createElement("p");
-      p.innerHTML = JSON.stringify(data);
-      document.querySelector(".output").appendChild(p);
-    });
-
-  </script>
-</body>
+  <head>
+    <title>Simple Websockets/Stream Example App</title>
+  </head>
+  <body>
+    <div class="output"></div>
+    <script src="/dist/bundle.js"></script>
+  </body>
 </html>

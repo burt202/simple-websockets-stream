@@ -4,6 +4,7 @@ var express = require("express");
 var app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
+var getStream = require("./stream");
 
 server.listen(8080);
 
@@ -14,9 +15,13 @@ app.get("/", function (req, res) {
 });
 
 io.on("connection", function (socket) {
-  socket.emit("news", { hello: "world1" });
-  socket.emit("news", { hello: "world2" });
-  socket.emit("news", { hello: "world3" });
-  socket.emit("news", { hello: "world4" });
-  socket.emit("news", { hello: "world5" });
+  var stream = getStream();
+
+  stream.on("data", function (message) {
+    socket.emit("news", message);
+  });
+
+  stream.on("end", function () {
+    console.log("done");
+  });
 });

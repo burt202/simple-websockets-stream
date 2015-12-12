@@ -14,7 +14,9 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-io.on("connection", function (socket) {
+io
+.of("/run")
+.on("connection", function (socket) {
   var stream = getStream();
 
   stream.on("data", function (message) {
